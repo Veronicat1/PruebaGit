@@ -1,0 +1,760 @@
+codigo de android studio app GNAA
+
+******AndroidManifest.xml************
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.gnaa">
+
+    <application
+        android:allowBackup="true"
+        android:fullBackupOnly="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.GNAA">
+
+
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@layout/activity_main" />
+
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="landscape"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MyLibrary"
+            android:label="@string/My_Library"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Settings"
+            android:label="@string/Settings"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Share"
+            android:label="@string/Share_with_Friends"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Bookstore"
+            android:label="@string/Bookstore"
+            android:screenOrientation="landscape" />
+    </application>
+
+</manifest>
+
+
+*/*/*/*/*/*/*/*/*/*Activities.XML*/*/*/*/*/*/*/*/*/*/*/*
+
+(1)***********activity_main.xml**************
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/bSettings"
+        android:layout_width="600dp"
+        android:layout_height="350dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/Settings"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.841"
+        app:layout_constraintStart_toEndOf="@+id/bShare"
+        app:layout_constraintTop_toBottomOf="@+id/bBookstore"
+        app:layout_constraintVertical_bias="0.663"/>
+
+    <Button
+        android:id="@+id/bShare"
+        android:layout_width="600dp"
+        android:layout_height="350dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/Share_with_Friends"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bLibrary" />
+
+    <Button
+        android:id="@+id/bBookstore"
+        android:layout_width="600dp"
+        android:layout_height="350dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/Bookstore"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/bLibrary"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bLibrary"
+        android:layout_width="600dp"
+        android:layout_height="350dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/My_Library"
+        android:textSize="40sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+(2)*************activity_myLibrary.xml******************
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relativeLayout"
+    tools:context=".MyLibrary">
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeToRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MissingClass">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="4dp"
+            tools:listitem="@layout/comic_item">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</RelativeLayout>
+
+
+(3)***************comic_item.xml*********************************
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/tv_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/tv_Author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_Title"
+            android:text="@string/author"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            />
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
+
+
+
+(4)***************activity_bookstore.xml*************************
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Bookstore">
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+(5)***************activity_Share.xml*******************************
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Share">
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+(6)**************activity_Settings.xml******************************
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Settings">
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+*/*/*/*/*/*/*/*/*/*/*/*Classes.KT*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+
+**************MainActivity.kt***************************************
+
+
+package com.example.gnaa
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.content.Intent
+
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val bLibrary = findViewById<Button>(R.id.bLibrary)
+        val bBookstore = findViewById<Button>(R.id.bBookstore)
+        val bShare = findViewById<Button>(R.id.bShare)
+        val bSettings = findViewById<Button>(R.id.bSettings)
+
+        bLibrary.setOnClickListener{
+            val intent = Intent(this, MyLibrary::class.java)
+            startActivity(intent)
+        }
+
+        bBookstore.setOnClickListener{
+            val intent = Intent(this, Bookstore::class.java)
+            startActivity(intent)
+        }
+
+        bShare.setOnClickListener{
+            val intent = Intent(this, Share::class.java)
+            startActivity(intent)
+        }
+
+        bSettings.setOnClickListener{
+            val intent = Intent(this, Settings::class.java)
+            startActivity(intent)
+        }
+    }
+}
+
+
+
+***************************MyLibrary.kt**********************************
+
+
+package com.example.gnaa
+
+//import android.content.Intent
+import android.annotation.SuppressLint
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+//import android.view.GestureDetector
+//import android.view.MotionEvent
+import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+//import kotlin.math.abs
+
+
+class MyLibrary : AppCompatActivity()/*, GestureDetector.OnGestureListener*/ {
+
+    /*lateinit var gestureDetector: GestureDetector
+
+    var x2: Float = 0.0f
+    var x1: Float = 0.0f*/
+
+
+    var recyclerView: RecyclerView? = null
+    var adapter: AdapterLibrary? = null
+    var layoutManager: RecyclerView.LayoutManager? = null
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_my_library)
+
+       /* gestureDetector = GestureDetector(this, this)*/
+
+
+        val comics = ArrayList<Comic>()
+
+        comics.add(Comic("Pokemon", "Satoshi"))
+        comics.add(Comic("Paprika", "Yasukata Tsutsui"))
+
+        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView?.setHasFixedSize(true)
+
+        layoutManager = LinearLayoutManager(this)
+        recyclerView?.layoutManager = layoutManager
+
+        adapter = AdapterLibrary(comics, object : ClickListener {
+
+            override fun onClick(view: View, index: Int) {
+
+            }
+
+        })
+
+        recyclerView?.adapter = adapter
+
+        val swipeRefreshLayout = findViewById<SwipeRefreshLayout>(R.id.swipeToRefresh)
+        swipeRefreshLayout.setOnRefreshListener {
+            for (i in 1..1000000000) {
+            }
+            swipeRefreshLayout.isRefreshing = false
+            comics.add(Comic("Romeo and juliet", "Shakespeare"))
+            adapter?.notifyDataSetChanged()
+        }
+
+    }
+
+   /* override fun onTouchEvent(event: MotionEvent?): Boolean {
+        gestureDetector.onTouchEvent(event)
+        when (event?.action) {
+            //when we start to swipe
+            0 -> {
+                x1 = event.x
+            }
+
+            //when we end the swipe
+            1 -> {
+                x2 = event.x
+
+                val valueX: Float = x2 - x1
+
+                if (abs(valueX) > OnSwipeTouchListener.MIN_DISTANCE) {
+                    //detect right side swipe
+                    if (x2 > x1) {
+                        onBackPressed()
+                        finish()
+                    }
+                }
+            }
+
+        }
+        return super.onTouchEvent(event)
+    }
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+    override fun onShowPress(e: MotionEvent?) {
+        //TODO("Not yet implemented")
+    }
+
+    override fun onSingleTapUp(e: MotionEvent?): Boolean {
+        //TODO("Not yet implemented")
+        return false
+    }
+
+    override fun onDown(e: MotionEvent?): Boolean {
+        //TODO("Not yet implemented")
+        return false
+    }
+
+    override fun onFling(
+        e1: MotionEvent?,
+        e2: MotionEvent?,
+        velocityX: Float,
+        velocityY: Float
+    ): Boolean {
+        //TODO("Not yet implemented")
+        return false
+    }
+
+    override fun onScroll(
+        e1: MotionEvent?,
+        e2: MotionEvent?,
+        distanceX: Float,
+        distanceY: Float
+    ): Boolean {
+        //TODO("Not yet implemented")
+        return false
+    }
+
+    override fun onLongPress(e: MotionEvent?) {
+        //TODO("Not yet implemented")
+    }*/
+}
+
+
+
+************************Bookstore.kt*****************************
+
+
+
+package com.example.gnaa
+
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+
+
+
+class Bookstore : AppCompatActivity() {
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_bookstore)
+
+
+
+
+    }
+
+
+}
+
+
+
+***************************Share.kt**********************************
+
+package com.example.gnaa
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+
+class Share : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_share)
+    }
+}
+
+
+***********************Settings.kt************************************
+
+
+
+package com.example.gnaa
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+
+class Settings : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_settings)
+    }
+}
+
+
+
+***************************Comic.kt************************************
+
+
+package com.example.gnaa
+
+data class Comic (val title:String, val author:String) {
+
+    //var title = ""
+    //var author = ""
+
+    //init {
+        //this.title = title
+        //this.author = author
+    //}
+}
+
+
+
+*/*/*/*/*/*/*/*/*/*/*/*/*Adapters.KT*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+
+**************************AdapterLibrary.kt*******************************
+
+
+package com.example.gnaa
+
+import android.view.LayoutInflater
+import androidx.recyclerview.widget.RecyclerView
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import kotlin.collections.ArrayList
+
+class AdapterLibrary (items:ArrayList<Comic>, var listener: ClickListener): RecyclerView.Adapter<AdapterLibrary.ViewHolder>() {
+
+    var items: ArrayList<Comic>? = null
+
+   // var viewHolder: ViewHolder? = null
+
+    init {
+        this.items = items
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.comic_item, parent, false)
+        return ViewHolder(view, listener)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = items?.get(position)
+        holder.title?.text = item?.title
+        holder.author?.text = item?.author
+    }
+
+    override fun getItemCount(): Int {
+        return items?.count()!!
+
+    }
+
+    class ViewHolder (view:View, listener: ClickListener): RecyclerView.ViewHolder(view), View.OnClickListener {
+
+        //var view = view
+        var title: TextView? = null
+        var author: TextView? = null
+        var listener:ClickListener? = null
+
+        init {
+            title = view.findViewById(R.id.tv_Title)
+            author = view.findViewById(R.id.tv_Author)
+            this.listener = listener
+            view.setOnClickListener(this)
+
+        }
+
+        override fun onClick(v: View?) {
+            this.listener?.onClick(v!!, absoluteAdapterPosition)
+        }
+    }
+
+}
+
+
+*/*/*/*/*/*/*/*/*/*/*/*/*/*Funciones de Accion*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+
+*************************ClickListener.kt****************************************
+
+package com.example.gnaa
+
+import android.view.View
+
+interface ClickListener {
+
+    fun onClick(view: View, index:Int)
+}
+
+
+
+*************************OnSwipeTouchListener**************************************
+
+
+
+package com.example.gnaa
+
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.GestureDetector
+import android.view.MotionEvent
+import android.widget.Toast
+import kotlin.math.abs
+
+open class OnSwipeTouchListener: AppCompatActivity(), GestureDetector.OnGestureListener {
+
+    lateinit var gestureDetector: GestureDetector
+
+    var x2: Float = 0.0f
+    var x1: Float = 0.0f
+    var y2: Float = 0.0f
+    var y1: Float = 0.0f
+
+    companion object {
+        const val MIN_DISTANCE = 100
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_my_library)
+
+        gestureDetector = GestureDetector(this, this)
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        gestureDetector.onTouchEvent(event)
+        when (event?.action) {
+
+            //when we start to swipe
+            0 -> {
+                x1 = event.x
+                y1 = event.y
+            }
+
+            //when we end the swipe
+            1 -> {
+                x2 = event.x
+                y2 = event.y
+
+                val valueX: Float = x2 - x1
+                val valueY: Float = y2 - y1
+
+                if (abs(valueX) > MIN_DISTANCE) {
+                    //detect right side swipe
+                    if (x2 > x1) {
+                        onBackPressed()
+                        //Toast.makeText(this, "Right swipe", Toast.LENGTH_SHORT).show()
+                    } else {
+                        //detect left side swipe
+                        Toast.makeText(this, "Left swipe", Toast.LENGTH_SHORT).show()
+                    }
+                } else if (abs(valueY) > MIN_DISTANCE) {
+                    //detect top to bottom swipe
+                    if (y2 > y1) {
+                        Toast.makeText(this, "Bottom swipe", Toast.LENGTH_SHORT).show()
+                    }
+                    //detect bottom to top swipe
+                    else {
+                        Toast.makeText(this, "Top swipe", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+        }
+        return super.onTouchEvent(event)
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+
+    override fun onShowPress(e: MotionEvent?) {
+        //TODO("Not yet implemented")
+    }
+
+    override fun onSingleTapUp(e: MotionEvent?): Boolean {
+        //TODO("Not yet implemented")
+        return false
+    }
+
+    override fun onDown(e: MotionEvent?): Boolean {
+        //TODO("Not yet implemented")
+        return false
+    }
+
+    override fun onFling(
+        e1: MotionEvent?,
+        e2: MotionEvent?,
+        velocityX: Float,
+        velocityY: Float
+    ): Boolean {
+        //TODO("Not yet implemented")
+        return false
+    }
+
+    override fun onScroll(
+        e1: MotionEvent?,
+        e2: MotionEvent?,
+        distanceX: Float,
+        distanceY: Float
+    ): Boolean {
+        //TODO("Not yet implemented")
+        return false
+    }
+
+    override fun onLongPress(e: MotionEvent?) {
+        //TODO("Not yet implemented")
+    }
+}
+
+
+*/*/*/*/*/*/*/*/*/*/*/*/*Tools.XML/*/*/*/*/*/*/*/*/*/*/*/*/*
+
+*************************strings.xml*******************************
+
+<resources>
+    <string name="app_name">GNAA</string>
+    <string name="Settings">Settings</string>
+    <string name="My_Library">My Library</string>
+    <string name="Share_with_Friends">Share with Friends</string>
+    <string name="Bookstore">Bookstore</string>
+
+    <string name="title">Title</string>
+    <string name="author">Author</string>
+
+
+</resources>
+
+
+/*/*/*/*/*/*/*/*/*/*/*/*Dependencias*/*/*/*/*/*/*/*/*/*/*/*/*/**
+
+    //implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+    implementation "androidx.cardview:cardview:1.0.0"
+
+
+
+
